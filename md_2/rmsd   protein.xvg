@@ -1,20 +1,3 @@
-# This file was created Wed Apr 12 10:01:52 2023
-# Created by:
-#                    :-) GROMACS - gmx rms, VERSION 5.1.1 (-:
-# 
-# Executable:   /usr/local/gromacs/bin/gmx
-# Data prefix:  /usr/local/gromacs
-# Command line:
-#   gmx rms -s em.tpr -f md_center.xtc -o fws_rmsd.xvg
-# gmx rms is part of G R O M A C S:
-#
-# Great Red Oystrich Makes All Chemists Sane
-#
-@    title "RMSD"
-@    xaxis  label "Time (ps)"
-@    yaxis  label "RMSD (nm)"
-@TYPE xy
-@ subtitle "Backbone after lsq fit to Backbone"
    0.0000000    0.0415232
   10.0000000    0.0953929
   20.0000000    0.1158337

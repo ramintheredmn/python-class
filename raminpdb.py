@@ -1,9 +1,4 @@
-import argparse
-import csv
-import os
 import requests
-import pandas as pd
-import subprocess
 
 
 def get_pdb_with_best_resolution(uniprot_id):
@@ -13,13 +8,14 @@ def get_pdb_with_best_resolution(uniprot_id):
     if response.ok:
         data_lines = response.text.splitlines()
         best_pdb_id = None
-        best_resolution = float('inf')
+        best_resolution: float = 0.0
         best_length = 0
+        chains = 0
 
         for line in data_lines:
             if line.startswith("DR   PDB; "):
-                pdb_id, method, resolution, length, chains = parse_pdb_line(line)
-                if length > best_length or (length == best_length and resolution < best_resolution):
+                pdb_id, _, resolution, length, chains = parse_pdb_line(line)
+                if length > best_length or (length == best_length and resolution < float(best_resolution)):
                     best_pdb_id = pdb_id
                     best_resolution = resolution
                     best_length = length
@@ -44,7 +40,7 @@ def parse_pdb_line(line):
     pdb_id = line_parts[1]
     method = line_parts[2]
     resolution_str = line_parts[3].split(" ")[0]
-    resolution = None
+    resolution = 0
     if resolution_str != '-':
         resolution = float(resolution_str)
     length_parts = line_parts[4].split("=")[1].split("-")
